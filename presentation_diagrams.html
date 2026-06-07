@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>T2S Predictive Maintenance - Diagrammes d'Architecture</title>
+    <!-- Chargement de Mermaid.js -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
+    <style>
+        body { 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+            background-color: #0f172a; 
+            color: #f8fafc; 
+            padding: 40px; 
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1 { 
+            color: #38bdf8; 
+            text-align: center; 
+            margin-bottom: 20px;
+            font-size: 2.5rem;
+        }
+        h2 { 
+            color: #10b981; 
+            border-bottom: 2px solid #1e293b; 
+            padding-bottom: 10px; 
+            margin-top: 60px; 
+        }
+        p.subtitle {
+            text-align: center;
+            color: #94a3b8;
+            margin-bottom: 40px;
+        }
+        .diagram-container { 
+            background: #1e293b; 
+            padding: 30px; 
+            border-radius: 12px; 
+            margin-bottom: 30px; 
+            display: flex; 
+            justify-content: center; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2); 
+            overflow-x: auto;
+        }
+        .instructions { 
+            background: #1e293b; 
+            padding: 20px; 
+            border-radius: 8px; 
+            margin-bottom: 40px; 
+            border-left: 4px solid #f59e0b; 
+            color: #cbd5e1;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+        .instructions strong {
+            color: #f59e0b;
+        }
+    </style>
+</head>
+<body>
+    <h1>Pack Visuel & Architecture PFE</h1>
+    <p class="subtitle">Plateforme d'Aide à la Décision IA pour Scanners CT (T2S)</p>
+
+    <div class="instructions">
+        <strong>💡 Guide d'utilisation pour votre rapport et soutenance :</strong><br><br>
+        Ce document HTML interactif génère en temps réel des diagrammes vectoriels d'architecture de qualité professionnelle.<br>
+        1. <strong>Ouvrez ce fichier</strong> directement dans votre navigateur web (Chrome/Edge/Firefox).<br>
+        2. Utilisez l'outil <strong>Capture d'écran de Windows (Win + Shift + S)</strong> pour découper les diagrammes.<br>
+        3. <strong>Collez-les directement</strong> dans votre présentation PowerPoint ou votre rapport Word PFE. Le fond sombre (Dark Mode) donnera un rendu très esthétique et technologique à vos slides.
+    </div>
+
+    <!-- 1. Global System Architecture -->
+    <h2>1. Architecture Globale du Système</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        graph TD
+            %% Nodes
+            U((👤 Utilisateur / Technicien))
+            
+            subgraph Frontend [Frontend Client - Next.js 16]
+                UI[Interface Utilisateur UI/UX]
+                Dash[Tableau de Bord]
+                Form[Formulaire de Prédiction]
+            end
+            
+            subgraph Backend [Backend API - FastAPI]
+                API[Routeur RESTful]
+                Auth[Gestion des Requêtes]
+                EXP[Module Expert]
+                PDF[Moteur de Reporting PDF]
+            end
+            
+            subgraph MachineLearning [Moteur IA & Data Science]
+                ML_Model[Modèle ML Régression Logistique]
+                SHAP[Module Explainability SHAP]
+                Preproc[Data Preprocessing Pipeline]
+            end
+            
+            subgraph Database [Couche de Persistance]
+                SQL[(Base de Données SQLite)]
+            end
+            
+            %% Connections
+            U -->|Interagit| UI
+            UI -->|Affiche Vue| Dash
+            UI -->|Soumet Télémétrie| Form
+            
+            Form -->|POST /api/predict| API
+            Dash -->|GET /api/analytics| API
+            
+            API --> Auth
+            Auth <-->|Lecture / Écriture| SQL
+            
+            Auth -->|Vecteur de features| Preproc
+            Preproc --> ML_Model
+            ML_Model -->|Classification| SHAP
+            SHAP -->|Probabilités & Poids| EXP
+            
+            EXP -->|Génération Diagnostic| API
+            API -->|Demande de Rapport| PDF
+            PDF -->|Téléchargement Binaire| U
+            
+            %% Styles
+            classDef user fill:#f59e0b,stroke:#b45309,color:#fff,stroke-width:2px;
+            classDef front fill:#0ea5e9,stroke:#0369a1,color:#fff,stroke-width:2px;
+            classDef back fill:#10b981,stroke:#047857,color:#fff,stroke-width:2px;
+            classDef ml fill:#8b5cf6,stroke:#5b21b6,color:#fff,stroke-width:2px;
+            classDef db fill:#64748b,stroke:#334155,color:#fff,stroke-width:2px;
+            
+            class U user;
+            class Frontend,UI,Dash,Form front;
+            class Backend,API,Auth,EXP,PDF back;
+            class MachineLearning,ML_Model,SHAP,Preproc ml;
+            class Database,SQL db;
+        </div>
+    </div>
+
+    <!-- 2. Complete Data Flow Diagram -->
+    <h2>2. Pipeline de Traitement des Données (Data Flow)</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        graph TD
+            A([Dataset Brut T2S CSV]) --> B[Nettoyage & Remplacement Valeurs Nulles]
+            B --> C[Ingénierie des Variables]
+            C --> D[Suppression du Target Leakage]
+            D --> E[Normalisation StandardScaler]
+            E --> F[Encodage Catégoriel LabelEncoder]
+            F --> G[(Base de Données)]
+            
+            G --> H{Séparation Train/Test Split}
+            H -->|80%| I[Données d'Entraînement]
+            H -->|20%| J[Données de Validation]
+            
+            I --> K[Entraînement des Algorithmes]
+            J --> L[Évaluation & Tests]
+            
+            K --> L
+            L --> M[Comparaison des Métriques F1-Score]
+            M --> N((Sélection du Meilleur Modèle))
+            N --> O[Déploiement en Production via API]
+
+            classDef data fill:#3b82f6,stroke:#1d4ed8,color:#fff;
+            classDef process fill:#f59e0b,stroke:#b45309,color:#fff;
+            classDef final fill:#10b981,stroke:#047857,color:#fff;
+            
+            class A,G data;
+            class B,C,D,E,F,H,I,J,K,L,M process;
+            class N,O final;
+        </div>
+    </div>
+
+    <!-- 3. Machine Learning Workflow -->
+    <h2>3. Flux de Travail Machine Learning (Entraînement & Comparaison)</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        graph LR
+            Input[Extraction des Features Pures] --> Split[Validation Croisée Stratifiée 5-Fold]
+            
+            Split --> LR[Logistic Regression]
+            Split --> RF[Random Forest]
+            Split --> XGB[XGBoost]
+            
+            LR --> Metrics[Comparaison F1-Score, Accuracy, Precision]
+            RF --> Metrics
+            XGB --> Metrics
+            
+            Metrics --> Best((Meilleur Modèle Retenu))
+            Best --> Export[Sérialisation .pkl]
+            Export --> Explainer[SHAP Explainer Initialisé]
+            Explainer --> API[Prêt pour l'Inférence en Temps Réel]
+
+            style Input fill:#64748b,stroke:#334155,color:#fff
+            style Split fill:#f59e0b,stroke:#b45309,color:#fff
+            style LR fill:#38bdf8,stroke:#0284c7,color:#fff
+            style RF fill:#38bdf8,stroke:#0284c7,color:#fff
+            style XGB fill:#38bdf8,stroke:#0284c7,color:#fff
+            style Best fill:#10b981,stroke:#047857,color:#fff
+            style API fill:#8b5cf6,stroke:#5b21b6,color:#fff
+        </div>
+    </div>
+
+    <!-- 4. Prediction Workflow -->
+    <h2>4. Diagramme de Séquence : Le Flux de Prédiction</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        sequenceDiagram
+            autonumber
+            actor Tech as Technicien
+            participant UI as Frontend (React/Next.js)
+            participant API as Backend (FastAPI)
+            participant ML as Moteur IA (Scikit-Learn)
+            participant DB as Base de Données
+            participant PDF as Moteur PDF
+            
+            Tech->>UI: Sélectionne un Scanner (Auto-load)
+            UI->>Tech: Affiche formulaire pré-rempli
+            Tech->>UI: Clique sur "Générer Prédiction"
+            UI->>API: POST /api/predict/risk (Payload JSON)
+            API->>ML: Envoie caractéristiques techniques
+            ML->>ML: Normalisation (Scaler)
+            ML->>ML: Inférence (Logistic Regression)
+            ML-->>API: Retourne [Classe de Risque, Probabilités, Poids SHAP]
+            API->>API: Calcule Health Score (0-100)
+            API->>API: Module Expert: Génère Recommandation d'action
+            API->>DB: Sauvegarde la Prédiction (Traçabilité)
+            API-->>UI: Retourne le Résultat complet
+            UI-->>Tech: Affichage du Tableau de Bord de Résultat
+            Tech->>UI: Clique "Télécharger Rapport PDF"
+            UI->>API: GET /api/predict/{id}/report.pdf
+            API->>PDF: Assemble le fichier selon template
+            PDF-->>Tech: Téléchargement du binaire PDF
+        </div>
+    </div>
+
+    <!-- 5. Expert Module Workflow -->
+    <h2>5. Arbre de Décision du Module Expert</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        graph TD
+            Input[Classification IA et Probabilités] --> Cond1{Risque == 'High'?}
+            
+            Cond1 -->|Oui| H1[Niveau: Critique]
+            Cond1 -->|Non| Cond2{Risque == 'Medium'?}
+            
+            Cond2 -->|Oui| M1[Niveau: Modéré]
+            Cond2 -->|Non| L1[Niveau: Faible]
+            
+            H1 --> ActionH[Identification du module le plus défaillant]
+            ActionH --> RecH[Recommandation: Arrêt immédiat & Remplacement sous 48h]
+            
+            M1 --> ActionM[Analyse du taux d'usure et MTBF]
+            ActionM --> RecM[Recommandation: Planifier maintenance préventive dans 30 jours]
+            
+            L1 --> ActionL[Surveillance de routine]
+            ActionL --> RecL[Recommandation: Équipement sain, nettoyage et calibration]
+            
+            RecH --> Output((Diagnostic Final Injecté dans UI/PDF))
+            RecM --> Output
+            RecL --> Output
+
+            style Cond1 fill:#ef4444,stroke:#b91c1c,color:#fff
+            style Cond2 fill:#f59e0b,stroke:#b45309,color:#fff
+            style Output fill:#10b981,stroke:#047857,color:#fff
+        </div>
+    </div>
+
+    <!-- 6. Application Navigation Workflow -->
+    <h2>6. Arborescence et Navigation de l'Application</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        graph TD
+            Landing[🌐 Landing Page / Accueil] --> Login[🔐 Page de Connexion]
+            Login --> Dash{📊 Tableau de Bord (Dashboard Principal)}
+            
+            Dash --> Scan[📝 Gestion des Scanners - Inventaire]
+            Dash --> Pred[🧠 Prédiction Risque IA - Formulaire]
+            Dash --> Hist[⏳ Historique - Traçabilité & Export PDF]
+            Dash --> Ana[📈 Analytics - EDA & Matrices]
+            Dash --> Mod[⚙️ Modèles ML - Comparateur & SHAP]
+            Dash --> Exp[🩺 Module Expert - Documentation métier]
+
+            style Landing fill:#0f172a,stroke:#334155,color:#fff
+            style Login fill:#1e293b,stroke:#475569,color:#fff
+            style Dash fill:#0ea5e9,stroke:#0284c7,color:#fff
+            style Scan fill:#334155,stroke:#475569,color:#fff
+            style Pred fill:#334155,stroke:#475569,color:#fff
+            style Hist fill:#334155,stroke:#475569,color:#fff
+            style Ana fill:#334155,stroke:#475569,color:#fff
+            style Mod fill:#334155,stroke:#475569,color:#fff
+            style Exp fill:#334155,stroke:#475569,color:#fff
+        </div>
+    </div>
+
+    <!-- 7. Jury Presentation Workflow -->
+    <h2>7. Feuille de Route pour la Soutenance (Live Demo)</h2>
+    <div class="diagram-container">
+        <div class="mermaid">
+        timeline
+            title Plan Séquence Recommandé pour la Démonstration PFE
+            section 1. Introduction
+              Landing Page : Contextualiser le projet et l'interface design
+              Tableau de Bord : Montrer les KPIs (Scanners, Risques, Vue globale)
+            section 2. La Data Science
+              Analytics (EDA) : Afficher la répartition et surtout la Matrice de Corrélation
+              Modèles ML : Montrer le comparateur, expliquer la suppression du Leakage, montrer SHAP
+            section 3. La Démonstration IA
+              Prédiction : Utiliser le menu déroulant pour auto-compléter un scanner à risque
+              Résultat : Expliquer la conversion Probabilité -> Health Score -> Recommandation Expert
+            section 4. Clôture Professionnelle
+              Historique : Montrer que tout est enregistré (Traçabilité)
+              Rapport PDF : Générer et ouvrir le PDF pour prouver le rendu industriel
+        </div>
+    </div>
+
+    <script>
+        // Initialisation de Mermaid avec le thème sombre pour correspondre au design de l'app
+        mermaid.initialize({ 
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            fontFamily: 'Segoe UI, Tahoma, Geneva, Verdana, sans-serif',
+            flowchart: { curve: 'basis' },
+            sequence: { useMaxWidth: false }
+        });
+    </script>
+</body>
+</html>
