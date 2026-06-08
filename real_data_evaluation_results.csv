@@ -1,0 +1,50 @@
+Serial_Number,Intervention_ID,Affected_Module,Actual_Severity,Maintenance_Type,Age,Maintenance_Cost,Downtime,Maintenance_Frequency,Failure_Event_Count,MTBF,Failure_Rate,Downtime_Per_Failure,Maintenance_Intensity,Affected_Module_Encoded,Predicted_Risk,Proba_Low,Proba_Medium,Proba_High
+343767HMO,OPT540_006,General Maintenance,Low,Préventive,7.0,7515.19,0.0,4,0,169.0,0.0,1.0,1.0,4,Low,99.88,0.09,0.03
+343767HMO,OPT540_007,General Maintenance,Low,Préventive,7.0,7515.19,1.0,4,0,169.0,0.0,1.0,1.0,4,Low,99.73,0.24,0.03
+343767HMO,OPT540_013,General Maintenance,Low,Préventive,7.0,7515.19,0.0,4,0,169.0,0.0,1.0,1.0,4,Low,99.88,0.09,0.03
+343767HMO,OPT540_045,General Maintenance,Low,Préventive,7.0,7515.19,0.0,4,0,169.0,0.0,1.0,1.0,4,Low,99.88,0.09,0.03
+347506HM8,OPT540_002,General Maintenance,Medium,Curative,7.0,7515.19,0.0,9,9,29.3333,1.0377,8.3333,75.0,4,High,4.95,4.5,90.56
+347506HM8,OPT540_003,DAS / Data Acquisition,Medium,Curative,7.0,7515.19,1.0,9,9,29.3333,1.0377,8.3333,75.0,2,High,0.1,1.59,98.31
+347506HM8,OPT540_010,Cooling / Tube,High,Curative,7.0,7515.19,8.0,9,9,29.3333,1.0377,8.3333,75.0,1,High,0.03,2.06,97.91
+347506HM8,OPT540_011,Cooling / Tube,High,Curative,7.0,7515.19,8.0,9,9,29.3333,1.0377,8.3333,75.0,1,High,0.03,2.06,97.91
+347506HM8,OPT540_019,DAS / Data Acquisition,High,Curative,7.0,7515.19,9.0,9,9,29.3333,1.0377,8.3333,75.0,2,High,0.03,2.51,97.46
+347506HM8,OPT540_036,DAS / Data Acquisition,High,Curative,7.0,7515.19,10.0,9,9,29.3333,1.0377,8.3333,75.0,2,High,0.03,2.78,97.19
+347506HM8,OPT540_037,DAS / Data Acquisition,High,Curative,7.0,7515.19,,9,9,29.3333,1.0377,8.3333,75.0,2,Medium,0.04,70.15,29.81
+347506HM8,OPT540_038,DAS / Data Acquisition,High,Curative,7.0,7515.19,1.0,9,9,29.3333,1.0377,8.3333,75.0,2,High,0.1,1.59,98.31
+347506HM8,OPT540_048,DAS / Data Acquisition,Medium,Curative,7.0,7515.19,38.0,9,9,29.3333,1.0377,8.3333,75.0,2,Medium,0.04,70.15,29.81
+387454HM2,OPT540_012,DAS / Data Acquisition,Medium,Curative,7.0,7515.19,6.0,3,3,30.6667,0.9926,4.0,12.0,2,Medium,0.18,99.69,0.13
+387454HM2,OPT540_014,Detector / Sensors,Medium,Curative,7.0,7515.19,2.0,3,3,30.6667,0.9926,4.0,12.0,3,Medium,0.88,98.27,0.86
+387454HM2,OPT540_041,Mechanical / Gantry,Medium,Curative,7.0,7515.19,4.0,3,3,30.6667,0.9926,4.0,12.0,5,Medium,0.28,99.55,0.17
+412355HMO,OPT540_046,Cooling / Tube,High,Curative,7.0,7515.19,1.0,1,1,1.0,1.0,1.0,1.0,1,Low,75.4,11.98,12.62
+421458HM1,OPT540_015,General Maintenance,Low,À vérifier,7.0,7515.19,0.0,11,9,18.0,1.6911,1.5556,14.0,4,High,25.11,19.01,55.88
+421458HM1,OPT540_016,Mechanical / Gantry,Medium,Curative,7.0,7515.19,4.0,11,9,18.0,1.6911,1.5556,14.0,5,Medium,0.23,92.4,7.37
+421458HM1,OPT540_017,General Maintenance,High,Curative,7.0,7515.19,0.0,11,9,18.0,1.6911,1.5556,14.0,4,High,25.11,19.01,55.88
+421458HM1,OPT540_018,Mechanical / Gantry,Medium,Curative,7.0,7515.19,4.0,11,9,18.0,1.6911,1.5556,14.0,5,Medium,0.23,92.4,7.37
+421458HM1,OPT540_020,General Maintenance,Medium,Curative,7.0,7515.19,0.0,11,9,18.0,1.6911,1.5556,14.0,4,High,25.11,19.01,55.88
+421458HM1,OPT540_023,General Maintenance,Medium,Curative,7.0,7515.19,,11,9,18.0,1.6911,1.5556,14.0,4,Medium,0.19,82.99,16.82
+421458HM1,OPT540_024,General Maintenance,Low,À vérifier,7.0,7515.19,0.0,11,9,18.0,1.6911,1.5556,14.0,4,High,25.11,19.01,55.88
+421458HM1,OPT540_025,General Maintenance,High,Curative,7.0,7515.19,0.0,11,9,18.0,1.6911,1.5556,14.0,4,High,25.11,19.01,55.88
+421458HM1,OPT540_034,Console / Software,Medium,Curative,7.0,7515.19,0.0,11,9,18.0,1.6911,1.5556,14.0,0,High,10.1,33.31,56.59
+421458HM1,OPT540_035,General Maintenance,High,Curative,7.0,7515.19,3.0,11,9,18.0,1.6911,1.5556,14.0,4,High,0.32,11.82,87.86
+421458HM1,OPT540_040,General Maintenance,High,Curative,7.0,7515.19,3.0,11,9,18.0,1.6911,1.5556,14.0,4,High,0.32,11.82,87.86
+430119HM8,OPT540_044,General Maintenance,Low,À vérifier,7.0,7515.19,0.0,1,0,1.0,0.0,0.0,0.0,4,Low,99.83,0.11,0.05
+CBAQG1600005HM,OPT540_047,Console / Software,Medium,Curative,7.0,7515.19,1.0,1,1,1.0,1.0,1.0,1.0,0,Low,67.34,28.75,3.92
+CBAQG1700061HM,OPT540_001,DAS / Data Acquisition,Medium,Curative,7.0,7515.19,4.0,11,9,31.8889,0.9546,1.0,9.0,2,Medium,0.17,92.02,7.8
+CBAQG1700061HM,OPT540_008,Mechanical / Gantry,Medium,Curative,7.0,7515.19,1.0,11,9,31.8889,0.9546,1.0,9.0,5,Medium,0.82,88.55,10.63
+CBAQG1700061HM,OPT540_009,Detector / Sensors,High,Curative,7.0,7515.19,2.0,11,9,31.8889,0.9546,1.0,9.0,3,High,0.59,25.57,73.84
+CBAQG1700061HM,OPT540_022,General Maintenance,Medium,Curative,7.0,7515.19,2.0,11,9,31.8889,0.9546,1.0,9.0,4,Medium,2.94,78.24,18.82
+CBAQG1700061HM,OPT540_027,DAS / Data Acquisition,Medium,Curative,7.0,7515.19,0.0,11,9,31.8889,0.9546,1.0,9.0,2,Medium,3.66,86.38,9.96
+CBAQG1700061HM,OPT540_028,Power / Electronics,High,Curative,7.0,7515.19,0.0,11,9,31.8889,0.9546,1.0,9.0,6,High,11.86,18.28,69.86
+CBAQG1700061HM,OPT540_029,Console / Software,Medium,Curative,7.0,7515.19,0.0,11,9,31.8889,0.9546,1.0,9.0,0,Medium,3.11,90.94,5.95
+CBAQG1700061HM,OPT540_030,General Maintenance,Low,Préventive,7.0,7515.19,0.0,11,9,31.8889,0.9546,1.0,9.0,4,Medium,37.41,54.06,8.53
+CBAQG1700061HM,OPT540_031,Console / Software,Medium,Curative,7.0,7515.19,0.0,11,9,31.8889,0.9546,1.0,9.0,0,Medium,3.11,90.94,5.95
+CBAQG1700061HM,OPT540_039,General Maintenance,Low,À vérifier,7.0,7515.19,,11,9,31.8889,0.9546,1.0,9.0,4,Medium,0.69,93.63,5.68
+CBAQG1700061HM,OPT540_050,General Maintenance,Medium,Curative,7.0,7515.19,0.0,11,9,31.8889,0.9546,1.0,9.0,4,Medium,37.41,54.06,8.53
+CBCQG20000072M,OPT540_004,Mechanical / Gantry,High,Curative,7.0,7515.19,20.0,5,4,63.5,0.4794,6.5,26.0,5,High,0.36,7.94,91.71
+CBCQG20000072M,OPT540_032,General Maintenance,Low,À vérifier,7.0,7515.19,0.0,5,4,63.5,0.4794,6.5,26.0,4,Low,91.96,6.17,1.87
+CBCQG20000072M,OPT540_033,General Maintenance,Medium,Curative,7.0,7515.19,3.0,5,4,63.5,0.4794,6.5,26.0,4,Medium,5.59,90.77,3.64
+CBCQG20000072M,OPT540_042,General Maintenance,Medium,Curative,7.0,7515.19,3.0,5,4,63.5,0.4794,6.5,26.0,4,Medium,5.59,90.77,3.64
+CBCQG20000072M,OPT540_043,General Maintenance,Medium,Curative,7.0,7515.19,0.0,5,4,63.5,0.4794,6.5,26.0,4,Low,91.96,6.17,1.87
+CBCQG2000066HM,OPT540_005,General Maintenance,Medium,Curative,7.0,7515.19,1.0,2,1,179.0,0.1701,2.0,2.0,4,Low,99.97,0.03,0.0
+CBCQG2000066HM,OPT540_026,Console / Software,Low,À vérifier,7.0,7515.19,1.0,2,1,179.0,0.1701,2.0,2.0,0,Low,99.94,0.05,0.0
+SO4T28596,OPT540_049,Cooling / Tube,High,Curative,7.0,7515.19,0.0,1,1,1.0,1.0,0.0,0.0,1,Low,81.08,11.41,7.51
