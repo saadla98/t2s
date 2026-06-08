@@ -7,8 +7,8 @@ echo.
 :: Backend dependencies
 echo [1/3] Installation des dependances Python...
 cd /d %~dp0backend
-pip install -r requirements.txt
-pip install openpyxl
+python -m pip install -r requirements.txt
+python -m pip install openpyxl
 if %errorlevel% neq 0 (
     echo ERREUR: pip a echoue. Verifiez que Python est installe avec "Add to PATH".
     pause
