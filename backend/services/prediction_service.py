@@ -144,6 +144,16 @@ def predict_risk(db: Session, scanner_data: dict, technician_name: str = None,
     # Recommendation
     recommendation = generate_recommendation(risk_level, health_score, probabilities)
 
+    # AI module prediction — use the predicted risk level as input
+    predicted_module = None
+    module_probabilities = {}
+    try:
+        module_result = predict_module({**scanner_data, "Failure_Risk": risk_level})
+        predicted_module = module_result["predicted_module"]
+        module_probabilities = module_result.get("module_probabilities", {})
+    except Exception:
+        pass
+
     # Save prediction to history
     pred_record = Prediction(
         device_id=scanner_data.get("Device_ID", "MANUAL"),
@@ -151,6 +161,7 @@ def predict_risk(db: Session, scanner_data: dict, technician_name: str = None,
         predicted_risk=risk_level,
         risk_probabilities=probabilities,
         health_score=health_score,
+        predicted_module=predicted_module,
         recommendation=recommendation["message"],
         technician_name=technician_name,
         technician_role=technician_role,
@@ -166,6 +177,8 @@ def predict_risk(db: Session, scanner_data: dict, technician_name: str = None,
         "probabilities": probabilities,
         "health_score": health_score,
         "recommendation": recommendation,
+        "predicted_module": predicted_module,
+        "module_probabilities": module_probabilities,
         "timestamp": pred_record.created_at.isoformat() if pred_record.created_at else datetime.now().isoformat(),
     }
 

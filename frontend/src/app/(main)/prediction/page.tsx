@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Download, Stethoscope, AlertCircle, HeartPulse, FileText } from "lucide-react";
+import { Download, Stethoscope, AlertCircle, HeartPulse, FileText, Cpu } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -10,16 +10,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { motion, AnimatePresence } from "framer-motion";
 import { predictRisk, downloadReport, getScanners } from "@/lib/api";
 import { useEffect } from "react";
-
-const modules = [
-  "Console / Software",
-  "Detector / Sensors",
-  "Power / Electronics",
-  "Mechanical / Gantry",
-  "Cooling / Tube",
-  "DAS / Data Acquisition",
-  "General Maintenance"
-];
 
 export default function PredictionPage() {
   const [loading, setLoading] = useState(false);
@@ -38,7 +28,6 @@ export default function PredictionPage() {
     Downtime_Per_Failure: "",
     Maintenance_Intensity: "",
     Historical_Risk_Index: "",
-    Affected_Module: ""
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -57,7 +46,8 @@ export default function PredictionPage() {
     fetchScanners();
   }, []);
 
-  const handleScannerSelect = (deviceId: string) => {
+  const handleScannerSelect = (deviceId: string | null) => {
+    if (!deviceId) return;
     setSelectedScannerId(deviceId);
     if (deviceId === "manual") {
       // Reset form
@@ -65,7 +55,7 @@ export default function PredictionPage() {
         Device_ID: "", Age: "", Maintenance_Cost: "", Downtime: "",
         Maintenance_Frequency: "", Failure_Event_Count: "", MTBF: "",
         Failure_Rate: "", Downtime_Per_Failure: "", Maintenance_Intensity: "",
-        Historical_Risk_Index: "", Affected_Module: ""
+        Historical_Risk_Index: "",
       });
       return;
     }
@@ -84,13 +74,8 @@ export default function PredictionPage() {
         Downtime_Per_Failure: scanner.downtime_per_failure?.toString() || "",
         Maintenance_Intensity: scanner.maintenance_intensity?.toString() || "",
         Historical_Risk_Index: scanner.historical_risk_index?.toString() || "",
-        Affected_Module: scanner.affected_module || ""
       });
     }
-  };
-
-  const handleSelectChange = (value: string | null) => {
-    setFormData({ ...formData, Affected_Module: value ?? "" });
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -190,19 +175,6 @@ export default function PredictionPage() {
                   <Input id="Historical_Risk_Index" name="Historical_Risk_Index" value={formData.Historical_Risk_Index} type="number" step="0.01" onChange={handleChange} className="bg-slate-900/50 border-slate-700 text-white" />
                 </div>
 
-                <div className="space-y-2 col-span-2">
-                  <Label htmlFor="Affected_Module">Module Affecté Récemment (Optionnel)</Label>
-                  <Select onValueChange={handleSelectChange} value={formData.Affected_Module}>
-                    <SelectTrigger className="bg-slate-900/50 border-slate-700 text-white">
-                      <SelectValue placeholder="Sélectionnez un module" />
-                    </SelectTrigger>
-                    <SelectContent className="bg-slate-800 border-slate-700 text-white">
-                      {modules.map((m) => (
-                        <SelectItem key={m} value={m}>{m}</SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
               </div>
 
               <Button type="submit" disabled={loading} className="w-full bg-sky-500 hover:bg-sky-600 text-white mt-6 h-12 text-lg">
@@ -272,6 +244,47 @@ export default function PredictionPage() {
                     <p className="text-sm text-slate-400 mt-2">Indicateur global de fiabilité de l'équipement.</p>
                   </CardContent>
                 </Card>
+
+                {result.predicted_module && (
+                  <Card className="glass-card border border-sky-500/30 bg-sky-500/5">
+                    <CardHeader className="pb-2">
+                      <CardTitle className="flex items-center gap-2 text-lg">
+                        <Cpu className="h-5 w-5 text-sky-400" />
+                        Module Prédit par IA
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="text-base font-semibold text-white">{result.predicted_module}</span>
+                        <span className="text-xs px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 border border-sky-500/30">IA Généré</span>
+                      </div>
+                      {result.module_probabilities && Object.keys(result.module_probabilities).length > 0 && (
+                        <div className="space-y-1.5 max-h-40 overflow-y-auto pr-1">
+                          {Object.entries(result.module_probabilities)
+                            .sort(([, a], [, b]) => (b as number) - (a as number))
+                            .slice(0, 4)
+                            .map(([mod, prob]: [string, any]) => (
+                              <div key={mod} className="space-y-0.5">
+                                <div className="flex justify-between text-xs text-slate-400">
+                                  <span className={mod === result.predicted_module ? "text-sky-300 font-medium" : ""}>{mod}</span>
+                                  <span>{Number(prob).toFixed(1)}%</span>
+                                </div>
+                                <div className="h-1.5 w-full bg-slate-800 rounded-full overflow-hidden">
+                                  <div
+                                    className="h-full rounded-full transition-all duration-1000"
+                                    style={{
+                                      width: `${prob}%`,
+                                      backgroundColor: mod === result.predicted_module ? '#38bdf8' : '#475569'
+                                    }}
+                                  />
+                                </div>
+                              </div>
+                            ))}
+                        </div>
+                      )}
+                    </CardContent>
+                  </Card>
+                )}
 
                 <Card className={`bg-${result.recommendation.color}-500/10 border border-${result.recommendation.color}-500/20`}>
                   <CardContent className="p-4 flex gap-3">
