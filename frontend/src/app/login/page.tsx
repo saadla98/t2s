@@ -2,7 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { ActivitySquare, Lock, User, ShieldAlert } from "lucide-react";
+import Image from "next/image";
+import { Lock, User, ShieldAlert } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -37,11 +38,17 @@ export default function LoginPage() {
         <div className="glass-card rounded-2xl overflow-hidden border border-slate-800 shadow-2xl backdrop-blur-xl">
           {/* Header */}
           <div className="p-8 text-center border-b border-slate-800 bg-slate-900/50">
-            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-2xl bg-sky-500/20 text-sky-400 mb-4 shadow-[0_0_15px_rgba(14,165,233,0.3)]">
-              <ActivitySquare className="h-8 w-8" />
+            <div className="flex justify-center mb-4">
+              <Image
+                src="/t2s_logo.png"
+                alt="Techniques Science Santé by T2S Group"
+                width={120}
+                height={77}
+                className="object-contain brightness-0 invert opacity-90"
+                priority
+              />
             </div>
-            <h1 className="text-2xl font-bold text-white tracking-tight">T2S Predict</h1>
-            <p className="text-slate-400 mt-2 text-sm">Portail de Maintenance Prédictive</p>
+            <p className="text-slate-400 text-sm">Portail de Maintenance Prédictive</p>
           </div>
 
           {/* Form */}

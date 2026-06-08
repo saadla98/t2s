@@ -8,6 +8,9 @@ const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 export const metadata: Metadata = {
   title: "T2S Predictive Maintenance Platform",
   description: "Système intelligent d'aide à la décision pour l'estimation du risque de panne des scanners CT",
+  icons: {
+    icon: "/t2s_logo.png",
+  },
 };
 
 export default function RootLayout({

@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowRight, ActivitySquare, ShieldCheck, Zap, Activity } from "lucide-react";
+import { ArrowRight, ShieldCheck, Zap, Activity } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export default function LandingPage() {
@@ -15,14 +16,14 @@ export default function LandingPage() {
 
       {/* Navigation */}
       <header className="flex items-center justify-between px-8 py-6 z-10">
-        <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-sky-500/20 text-sky-400">
-            <ActivitySquare className="h-6 w-6" />
-          </div>
-          <span className="text-2xl font-bold tracking-tight text-white">
-            T2S <span className="text-sky-400">Predict</span>
-          </span>
-        </div>
+        <Image
+          src="/t2s_logo.png"
+          alt="Techniques Science Santé by T2S Group"
+          width={120}
+          height={77}
+          className="object-contain brightness-0 invert opacity-90"
+          priority
+        />
         <Link href="/login">
           <Button variant="outline" className="border-slate-700 bg-slate-800/50 hover:bg-slate-800 text-white backdrop-blur-md">
             Connexion au Portail
