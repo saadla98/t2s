@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { cn } from "@/lib/utils";
 import {
@@ -29,13 +30,15 @@ export function Sidebar() {
 
   return (
     <div className="flex h-screen w-64 flex-col border-r border-slate-800 bg-slate-900/50 backdrop-blur-xl">
-      <div className="flex h-16 items-center gap-3 px-6 border-b border-slate-800">
-        <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-sky-500/20 text-sky-400">
-          <ActivitySquare className="h-5 w-5" />
-        </div>
-        <span className="text-lg font-bold tracking-tight text-slate-100">
-          T2S <span className="text-sky-400">Predict</span>
-        </span>
+      <div className="flex h-[84px] items-center justify-center px-5 border-b border-slate-800">
+        <Image
+          src="/t2s_logo.png"
+          alt="Techniques Science Santé by T2S Group"
+          width={106}
+          height={68}
+          className="object-contain brightness-0 invert opacity-90"
+          priority
+        />
       </div>
 
       <div className="flex-1 overflow-y-auto py-6">

@@ -10,6 +10,7 @@ from sklearn.model_selection import train_test_split, StratifiedKFold, cross_val
 from sklearn.preprocessing import StandardScaler, LabelEncoder
 from sklearn.linear_model import LogisticRegression
 from sklearn.ensemble import RandomForestClassifier
+from sklearn.utils.class_weight import compute_sample_weight
 from sklearn.metrics import (
     accuracy_score, precision_score, recall_score, f1_score,
     confusion_matrix, classification_report
@@ -76,18 +77,23 @@ def train_all_models(db: Session) -> dict:
         X_scaled, y, test_size=0.2, random_state=42, stratify=y
     )
 
+    # Class weights to handle imbalance (real data skews toward Medium/High)
+    sample_weights = compute_sample_weight("balanced", y_train)
+
     # Define models
     models = {
         "Logistic Regression": LogisticRegression(
-            C=1.0, solver="lbfgs", max_iter=1000, multi_class="multinomial", random_state=42
+            C=1.0, solver="lbfgs", max_iter=1000,
+            class_weight="balanced", random_state=42
         ),
         "Random Forest": RandomForestClassifier(
-            n_estimators=200, max_depth=10, min_samples_split=5, random_state=42, n_jobs=-1
+            n_estimators=200, max_depth=10, min_samples_split=5,
+            class_weight="balanced", random_state=42, n_jobs=-1
         ),
         "XGBoost": XGBClassifier(
             n_estimators=200, max_depth=6, learning_rate=0.1,
             subsample=0.8, colsample_bytree=0.8, random_state=42,
-            use_label_encoder=False, eval_metric="mlogloss"
+            eval_metric="mlogloss"
         ),
     }
 
@@ -103,8 +109,11 @@ def train_all_models(db: Session) -> dict:
     db.commit()
 
     for name, model in models.items():
-        # Train
-        model.fit(X_train, y_train)
+        # Train (XGBoost needs sample_weight explicitly; others use class_weight param)
+        if name == "XGBoost":
+            model.fit(X_train, y_train, sample_weight=sample_weights)
+        else:
+            model.fit(X_train, y_train)
 
         # Predict
         y_pred = model.predict(X_test)
