@@ -74,7 +74,6 @@ export default function ModelsPage() {
                   <TableHead className="text-slate-300">Précision</TableHead>
                   <TableHead className="text-slate-300">Rappel</TableHead>
                   <TableHead className="text-slate-300">F1 Score</TableHead>
-                  <TableHead className="text-slate-300">Score CV (Moy ± Std)</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
@@ -89,9 +88,6 @@ export default function ModelsPage() {
                     <TableCell className="text-slate-300">{(model.recall * 100).toFixed(2)}%</TableCell>
                     <TableCell className={`font-bold ${model.is_best ? 'text-sky-400' : 'text-slate-300'}`}>
                       {(model.f1_score * 100).toFixed(2)}%
-                    </TableCell>
-                    <TableCell className="text-slate-400 text-sm">
-                      {(model.cv_mean * 100).toFixed(2)}% ± {(model.cv_std * 100).toFixed(2)}%
                     </TableCell>
                   </TableRow>
                 ))}

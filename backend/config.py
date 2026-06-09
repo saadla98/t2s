@@ -14,7 +14,7 @@ REPORTS_DIR.mkdir(exist_ok=True)
 
 DATABASE_URL = f"sqlite:///{BASE_DIR / 'ct_scanner.db'}"
 
-DATASET_FILENAME = "CT_Scanner_Dataset_Merged.csv"
+DATASET_FILENAME = "CT_Scanner_Dataset_Engineered_T2S_with_Affected_Module.csv"
 
 # Feature columns used for ML training (Historical_Risk_Index removed — target leakage)
 FEATURE_COLUMNS = [
